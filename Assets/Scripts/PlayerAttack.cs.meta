@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 1fdaf81fd75ee8e46b828074614fd00f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - fastSwing1: {fileID: 1660058720728347464, guid: f005187d702ca0b4faba9a74c10d1b0b, type: 3}
+  - fastSwing2: {fileID: 1660058720728347464, guid: ba3b620af3608f946973eee129d7348e, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

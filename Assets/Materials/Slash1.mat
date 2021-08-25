@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Slash2
+  m_Name: Slash1
   m_Shader: {fileID: -6465566751694194690, guid: c748f54a30bb96b45aa1f6f108dfa915, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -44,5 +44,5 @@ Material:
     - Vector1_4cc600dd67c948aa81f391796343b333: 1
     - Vector1_f9f4caca189843b3ad7ec7e9b51b32f4: 5
     m_Colors:
-    - Color_62efa26129bd465a9093240e733db44d: {r: 11.682697, g: 4.13303, b: 4.13303, a: 1}
+    - Color_62efa26129bd465a9093240e733db44d: {r: 91.57773, g: 91.57773, b: 91.57773, a: 1}
   m_BuildTextureStacks: []
