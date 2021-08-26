@@ -6,8 +6,7 @@ using DG.Tweening;
 public class PlayerMovement : MonoBehaviour
 {
 
-    [SerializeField]
-    float movementSpeed = 5f;
+    public float movementSpeed = 5f;
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
     CharacterController controller;
@@ -41,32 +40,12 @@ public class PlayerMovement : MonoBehaviour
 
             controller.Move((direction * movementSpeed * Time.deltaTime) + Vector3.up * -1);
 
-            Vector2 movementVector = new Vector2(direction.x, direction.z);
-            Vector2 rotationVector = DegreeToVector2(transform.rotation.eulerAngles.y);
+            Vector3 localVelocity = transform.InverseTransformDirection(direction);
 
-            Vector2 differenceVector = new Vector2(movementVector.x - rotationVector.x, movementVector.y - rotationVector.y);
+            Debug.Log("Testing Solution: " + localVelocity);
 
-            Vector2 absoluteVector = new Vector2(differenceVector.x, direction.magnitude);
-
-            //Vector2 targetVector = new Vector2()
-
-            Debug.Log("Movement Vector: " + movementVector);
-            Debug.Log("Rotation Vector: " + rotationVector);
-
-            Debug.Log("Testing Solution: " + (new Vector2(0, direction.magnitude)));
-
-            animator.SetFloat("VelocityX", 0);
-            animator.SetFloat("VelocityY", direction.magnitude);
-
-            Vector2 RadianToVector2(float radian)
-            {
-                return new Vector2(Mathf.Sin(radian), Mathf.Cos(radian));
-            }
-
-            Vector2 DegreeToVector2(float degree)
-            {
-                return RadianToVector2(degree * Mathf.Deg2Rad);
-            }
+            animator.SetFloat("VelocityX", localVelocity.x);
+            animator.SetFloat("VelocityY", localVelocity.z);
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -77,6 +56,11 @@ public class PlayerMovement : MonoBehaviour
                 transform.DOMove(transform.position + new Vector3(direction.x, 0, direction.z) * 3, 0.5f, false).SetEase(Ease.OutSine).OnComplete(() => { canMove = true; });
             }
 
+        }
+        else
+        {
+            animator.SetFloat("VelocityX", 0f);
+            animator.SetFloat("VelocityY", 0f);
         }
     }
 }
