@@ -13,12 +13,14 @@ public class PlayerMovement : MonoBehaviour
     CharacterController controller;
     PlayerAttack playerAttack;
     public bool canMove;
+    Animator animator;
 
     void Start()
     {
         canMove = true;
         controller = GetComponent<CharacterController>();
         playerAttack = GetComponent<PlayerAttack>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -27,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
         float yMovement = Input.GetAxisRaw("Vertical");
 
         Vector3 direction = new Vector3(xMovement, 0, yMovement).normalized;
+
+        animator.SetFloat("MoveSpeed", direction.magnitude);
 
         if (direction.magnitude >= 0.1f && canMove)
         {
@@ -37,13 +41,72 @@ public class PlayerMovement : MonoBehaviour
 
             controller.Move((direction * movementSpeed * Time.deltaTime) + Vector3.up * -1);
 
+            float difference = transform.rotation.eulerAngles.y - targetAngle;
+            switch (difference)
+            {
+                default:
+                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 0f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 0f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 0f);
+                    break;
+                case 90:
+                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 0f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 0f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 1f);
+                    break;
+                case -90:
+                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 0f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 1f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 0f);
+                    break;
+                case 180:
+                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 1f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 0f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 0f);
+                    break;
+                case 135:
+                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 1f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 0.5f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 0f);
+                    break;
+                case -135:
+                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 1f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 0f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 0.5f);
+                    break;
+                case 270:
+                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 0f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 1f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 0f);
+                    break;
+                case 225:
+                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 1f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 0f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 0.5f);
+                    break;
+                case 45:
+                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 0f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 0f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 0.5f);
+                    break;
+                case -45:
+                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 0f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 0.5f);
+                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 0f);
+                    break;
+
+            }
+            Debug.Log(difference);
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                animator.SetTrigger("Roll");
                 canMove = false;
                 playerAttack.rotationTimer = 0f;
                 transform.rotation = Quaternion.Euler(0, Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg, 0);
                 transform.DOMove(transform.position + new Vector3(direction.x, 0, direction.z) * 3, 0.5f, false).SetEase(Ease.OutSine).OnComplete(() => { canMove = true; });
             }
+
         }
     }
 }
