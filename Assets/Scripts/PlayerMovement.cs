@@ -41,62 +41,26 @@ public class PlayerMovement : MonoBehaviour
 
             controller.Move((direction * movementSpeed * Time.deltaTime) + Vector3.up * -1);
 
-            float difference = transform.rotation.eulerAngles.y - targetAngle;
-            switch (difference)
-            {
-                default:
-                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 0f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 0f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 0f);
-                    break;
-                case 90:
-                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 0f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 0f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 1f);
-                    break;
-                case -90:
-                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 0f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 1f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 0f);
-                    break;
-                case 180:
-                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 1f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 0f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 0f);
-                    break;
-                case 135:
-                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 1f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 0.5f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 0f);
-                    break;
-                case -135:
-                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 1f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 0f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 0.5f);
-                    break;
-                case 270:
-                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 0f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 1f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 0f);
-                    break;
-                case 225:
-                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 1f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 0f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 0.5f);
-                    break;
-                case 45:
-                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 0f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 0f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 0.5f);
-                    break;
-                case -45:
-                    animator.SetLayerWeight(animator.GetLayerIndex("Back"), 0f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Right"), 0.5f);
-                    animator.SetLayerWeight(animator.GetLayerIndex("Left"), 0f);
-                    break;
+            Vector2 movementVector = new Vector2(direction.x, direction.z);
+            Vector2 rotationVector = DegreeToVector2(transform.rotation.eulerAngles.y);
+            Vector2 localMovement = new Vector2(transform.forward.x - movementVector.x, transform.forward.z - movementVector.y);
 
+            Debug.Log(localMovement);
+
+            animator.SetFloat("VelocityX", rotationVector.x - movementVector.y);
+            animator.SetFloat("VelocityY", rotationVector.y - movementVector.x);
+
+
+            Vector2 RadianToVector2(float radian)
+            {
+                return new Vector2(Mathf.Sin(radian), Mathf.Cos(radian));
             }
-            Debug.Log(difference);
+
+            Vector2 DegreeToVector2(float degree)
+            {
+                return RadianToVector2(degree * Mathf.Deg2Rad);
+            }
+
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
