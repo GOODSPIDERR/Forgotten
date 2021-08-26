@@ -43,13 +43,20 @@ public class PlayerMovement : MonoBehaviour
 
             Vector2 movementVector = new Vector2(direction.x, direction.z);
             Vector2 rotationVector = DegreeToVector2(transform.rotation.eulerAngles.y);
-            Vector2 localMovement = new Vector2(transform.forward.x - movementVector.x, transform.forward.z - movementVector.y);
 
-            Debug.Log(localMovement);
+            Vector2 differenceVector = new Vector2(movementVector.x - rotationVector.x, movementVector.y - rotationVector.y);
 
-            animator.SetFloat("VelocityX", rotationVector.x - movementVector.y);
-            animator.SetFloat("VelocityY", rotationVector.y - movementVector.x);
+            Vector2 absoluteVector = new Vector2(differenceVector.x, direction.magnitude);
 
+            //Vector2 targetVector = new Vector2()
+
+            Debug.Log("Movement Vector: " + movementVector);
+            Debug.Log("Rotation Vector: " + rotationVector);
+
+            Debug.Log("Testing Solution: " + (new Vector2(0, direction.magnitude)));
+
+            animator.SetFloat("VelocityX", 0);
+            animator.SetFloat("VelocityY", direction.magnitude);
 
             Vector2 RadianToVector2(float radian)
             {
@@ -60,7 +67,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 return RadianToVector2(degree * Mathf.Deg2Rad);
             }
-
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
