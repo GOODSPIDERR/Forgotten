@@ -24,7 +24,7 @@ public class EnemyScript : MonoBehaviour
             health--;
             if (health <= 0)
             {
-                Vector3 difference = transform.position - player.transform.position;
+                Vector3 difference = player.transform.position - transform.position;
 
                 float targetAngle = Mathf.Atan2(difference.x, difference.z) * Mathf.Rad2Deg;
                 Instantiate(bloodSplatter, transform.position, Quaternion.Euler(0, targetAngle, 0));
