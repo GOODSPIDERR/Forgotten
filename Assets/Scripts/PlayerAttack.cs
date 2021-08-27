@@ -9,6 +9,9 @@ public class PlayerAttack : MonoBehaviour
     public float rotationTimer = 0f;
     float targetAngle = 0f;
     public bool canAttack;
+    public float cleanliness = 1f;
+
+    public Material bloodMaterial;
 
     void Start()
     {
@@ -17,6 +20,11 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
+        cleanliness += 0.15f * Time.deltaTime;
+        cleanliness = Mathf.Clamp(cleanliness, 0f, 1f);
+
+        bloodMaterial.SetFloat("Cleanliness_", cleanliness);
+
         float xAttack = Input.GetAxisRaw("HAttack");
         float yAttack = Input.GetAxisRaw("VAttack");
 
@@ -80,5 +88,11 @@ public class PlayerAttack : MonoBehaviour
             var swing = Instantiate(targetSwing, transform.position + transform.forward + transform.up, transform.rotation);
             swing.transform.parent = gameObject.transform;
         }
+
+
+    }
+    public void IncreaseBlood(float blood)
+    {
+        cleanliness -= blood;
     }
 }
