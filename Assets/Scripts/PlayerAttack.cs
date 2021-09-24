@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -12,12 +13,16 @@ public class PlayerAttack : MonoBehaviour
     public float cleanliness = 1f;
 
     public Material bloodMaterial;
+    PlayerInput playerInput;
+    PlayerInputActions playerInputActions;
 
     void Start()
     {
         canAttack = true;
+        playerInput = GetComponent<PlayerInput>();
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Player.Enable();
     }
-
     void Update()
     {
         cleanliness += 0.15f * Time.deltaTime;
@@ -25,8 +30,12 @@ public class PlayerAttack : MonoBehaviour
 
         bloodMaterial.SetFloat("Cleanliness_", cleanliness);
 
-        float xAttack = Input.GetAxisRaw("HAttack");
-        float yAttack = Input.GetAxisRaw("VAttack");
+        Vector2 attackVector = playerInputActions.Player.Attack.ReadValue<Vector2>();
+
+        Debug.Log(attackVector);
+
+        float xAttack = attackVector.x;
+        float yAttack = attackVector.y;
 
         Vector3 swingDirection = new Vector3(xAttack, 0, yAttack);
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using DG.Tweening;
 
 public class PlayerMovement : MonoBehaviour
@@ -13,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     PlayerAttack playerAttack;
     public bool canMove;
     Animator animator;
+    PlayerInput playerInput;
+    PlayerInputActions playerInputActions;
+    Vector3 direction;
 
     void Start()
     {
@@ -20,14 +24,20 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         playerAttack = GetComponent<PlayerAttack>();
         animator = GetComponent<Animator>();
+        playerInput = GetComponent<PlayerInput>();
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Player.Enable();
     }
 
     void Update()
     {
-        float xMovement = Input.GetAxisRaw("Horizontal");
-        float yMovement = Input.GetAxisRaw("Vertical");
+        Vector2 inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
+        float xMovement = inputVector.x;
+        float yMovement = inputVector.y;
 
-        Vector3 direction = new Vector3(xMovement, 0, yMovement).normalized;
+        Debug.Log(inputVector);
+
+        direction = new Vector3(xMovement, 0, yMovement).normalized;
 
         animator.SetFloat("MoveSpeed", direction.magnitude);
 
@@ -47,20 +57,23 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("VelocityX", localVelocity.x);
             animator.SetFloat("VelocityY", localVelocity.z);
 
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                animator.SetTrigger("Roll");
-                canMove = false;
-                playerAttack.rotationTimer = 0f;
-                transform.rotation = Quaternion.Euler(0, Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg, 0);
-                transform.DOMove(transform.position + new Vector3(direction.x, 0, direction.z) * 3, 0.5f, false).SetEase(Ease.OutSine).OnComplete(() => { canMove = true; });
-            }
-
         }
         else
         {
             animator.SetFloat("VelocityX", 0f);
             animator.SetFloat("VelocityY", 0f);
+        }
+
+    }
+    public void Dodge()
+    {
+        if (direction.magnitude >= 0.1f && canMove)
+        {
+            animator.SetTrigger("Roll");
+            canMove = false;
+            playerAttack.rotationTimer = 0f;
+            transform.rotation = Quaternion.Euler(0, Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg, 0);
+            transform.DOMove(transform.position + new Vector3(direction.x, 0, direction.z) * 3, 0.5f, false).SetEase(Ease.OutSine).OnComplete(() => { canMove = true; });
         }
     }
 }
