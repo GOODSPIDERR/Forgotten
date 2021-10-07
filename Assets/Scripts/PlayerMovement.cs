@@ -73,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
             canMove = false;
             playerAttack.rotationTimer = 0f;
             transform.rotation = Quaternion.Euler(0, Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg, 0);
-            transform.DOMove(transform.position + new Vector3(direction.x, 0, direction.z) * 3, 0.5f, false).SetEase(Ease.OutSine).OnComplete(() => { canMove = true; });
+            transform.DOMove(transform.position + new Vector3(direction.x, 0, direction.z) * 3, 0.5f, false).SetEase(Ease.OutSine).OnComplete(() => canMove = true); //This needs to be reworked to prevent the player from being able to go through walls when dodging
         }
     }
 }

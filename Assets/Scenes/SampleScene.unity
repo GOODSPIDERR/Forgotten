@@ -1256,7 +1256,7 @@ MonoBehaviour:
   rotationTimer: 0
   canAttack: 0
   blood: 0
-  cooldown: 0.2
+  cooldown: 0.15
   bloodMaterial: {fileID: 2100000, guid: c70da9038ca22884f866c12cf3c63f5b, type: 2}
   slider: {fileID: 1221169583}
   bloodDrip: {fileID: 2124944119}

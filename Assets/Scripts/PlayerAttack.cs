@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.VFX;
+using DG.Tweening;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class PlayerAttack : MonoBehaviour
     public Slider slider;
     public VisualEffect bloodDrip;
     bool playBool = false;
+    Vector3 initialPosition;
 
     void Start()
     {
@@ -29,6 +31,7 @@ public class PlayerAttack : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
+        initialPosition = slider.transform.localPosition;
     }
     void Update()
     {
@@ -121,5 +124,11 @@ public class PlayerAttack : MonoBehaviour
     public void IncreaseBlood(float newBlood)
     {
         blood += newBlood;
+        if (blood >= 1f)
+        {
+            slider.transform.localPosition = initialPosition;
+            slider.transform.DOShakePosition(0.5f, 10f, 30, 90f);
+
+        }
     }
 }
