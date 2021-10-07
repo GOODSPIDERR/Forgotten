@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using UnityEngine.VFX;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -10,11 +12,16 @@ public class PlayerAttack : MonoBehaviour
     public float rotationTimer = 0f;
     float targetAngle = 0f;
     public bool canAttack;
-    public float cleanliness = 1f;
+    public float blood = 0f;
+    public float cooldown;
+    float cooldownMeter;
 
     public Material bloodMaterial;
     PlayerInput playerInput;
     PlayerInputActions playerInputActions;
+    public Slider slider;
+    public VisualEffect bloodDrip;
+    bool playBool = false;
 
     void Start()
     {
@@ -25,10 +32,16 @@ public class PlayerAttack : MonoBehaviour
     }
     void Update()
     {
-        cleanliness += 0.15f * Time.deltaTime;
-        cleanliness = Mathf.Clamp(cleanliness, 0f, 1f);
+        float bloodDrain;
+        bloodDrain = blood < 1f ? 0.25f : 0.5f;
+        blood -= bloodDrain * Time.deltaTime;
+        blood = Mathf.Clamp(blood, 0f, 1.5f);
+        slider.value = blood;
 
-        bloodMaterial.SetFloat("Cleanliness_", cleanliness);
+        if (blood > 0) bloodDrip.enabled = true;
+        else bloodDrip.enabled = false;
+
+        bloodMaterial.SetFloat("Cleanliness_", 1f - blood);
 
         Vector2 attackVector = playerInputActions.Player.Attack.ReadValue<Vector2>();
 
@@ -39,10 +52,14 @@ public class PlayerAttack : MonoBehaviour
 
         Vector3 swingDirection = new Vector3(xAttack, 0, yAttack);
 
+        cooldownMeter -= Time.deltaTime;
+
+        //if (cooldownMeter <= 0f) canAttack = true; else canAttack = false; //Maybe tying the canAttack directly to the cooldown isn't the best idea
+
         if (swingDirection.magnitude > 0.1f)
         {
             targetAngle = Mathf.Atan2(swingDirection.x, swingDirection.z) * Mathf.Rad2Deg;
-            if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) && canAttack)
+            if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) && canAttack && cooldownMeter <= 0f)
             {
                 switch (stance)
                 {
@@ -80,6 +97,7 @@ public class PlayerAttack : MonoBehaviour
 
         void Attack(int stance)
         {
+            cooldownMeter = cooldown;
             GameObject targetSwing = fastSwing1;
             switch (stance)
             {
@@ -100,8 +118,8 @@ public class PlayerAttack : MonoBehaviour
 
 
     }
-    public void IncreaseBlood(float blood)
+    public void IncreaseBlood(float newBlood)
     {
-        cleanliness -= blood;
+        blood += newBlood;
     }
 }

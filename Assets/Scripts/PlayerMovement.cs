@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         float xMovement = inputVector.x;
         float yMovement = inputVector.y;
 
-        Debug.Log(inputVector);
+        //Debug.Log(inputVector);
 
         direction = new Vector3(xMovement, 0, yMovement).normalized;
 
@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 localVelocity = transform.InverseTransformDirection(direction);
 
-            Debug.Log("Testing Solution: " + localVelocity);
+            //Debug.Log("Testing Solution: " + localVelocity);
 
             animator.SetFloat("VelocityX", localVelocity.x);
             animator.SetFloat("VelocityY", localVelocity.z);
