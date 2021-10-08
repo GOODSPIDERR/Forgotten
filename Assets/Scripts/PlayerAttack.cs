@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.VFX;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -24,6 +26,9 @@ public class PlayerAttack : MonoBehaviour
     public VisualEffect bloodDrip;
     bool playBool = false;
     Vector3 initialPosition;
+    AudioSource hitSound;
+    public CinemachineVirtualCamera virtualCamera;
+
 
     void Start()
     {
@@ -32,6 +37,7 @@ public class PlayerAttack : MonoBehaviour
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
         initialPosition = slider.transform.localPosition;
+        hitSound = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -129,6 +135,33 @@ public class PlayerAttack : MonoBehaviour
             slider.transform.localPosition = initialPosition;
             slider.transform.DOShakePosition(0.5f, 10f, 30, 90f);
 
+        }
+    }
+
+    public void TakeDamage(float currentBlood)
+    {
+        float randomNumber = Random.Range(0.0f, 1.0f);
+        if (randomNumber <= currentBlood)
+        {
+            CinemachineBasicMultiChannelPerlin perlin = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            perlin.m_AmplitudeGain = 5f;
+            DOTween.To(() => perlin.m_AmplitudeGain, x => perlin.m_AmplitudeGain = x, 0f, 0.5f);
+            hitSound.Play();
+            Debug.Log("Damage Blocked!");
+            blood -= 0.2f;
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Debug.Log("You're dead!");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Bad"))
+        {
+            TakeDamage(blood);
         }
     }
 }
