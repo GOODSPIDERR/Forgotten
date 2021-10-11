@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
-        
+
         //Setters & Getters
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();

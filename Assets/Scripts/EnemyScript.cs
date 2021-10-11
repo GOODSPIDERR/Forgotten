@@ -8,7 +8,7 @@ public class EnemyScript : MonoBehaviour
     public GameObject bloodSplatter;
     GameObject player;
     public Material bloodMaterial;
-    public PlayerAttack playerAttack;
+    public PlayerHealth playerHealth;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -21,7 +21,7 @@ public class EnemyScript : MonoBehaviour
             health--;
             if (health <= 0)
             {
-                playerAttack.IncreaseBlood(0.25f);
+                playerHealth.IncreaseBlood(0.25f);
                 Vector3 difference = player.transform.position - transform.position;
 
                 float targetAngle = Mathf.Atan2(difference.x, difference.z) * Mathf.Rad2Deg;

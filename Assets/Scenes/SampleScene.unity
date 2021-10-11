@@ -123,6 +123,101 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 67775b04ae62ec4408e117b0d5200a3b, type: 2}
+--- !u!1 &48748879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 48748880}
+  - component: {fileID: 48748883}
+  - component: {fileID: 48748882}
+  - component: {fileID: 48748881}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &48748880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48748879}
+  m_LocalRotation: {x: -0.08774466, y: 0.49497855, z: 0.050326195, w: 0.8629974}
+  m_LocalPosition: {x: 0.545, y: 0.108, z: 0.295}
+  m_LocalScale: {x: 0.03493162, y: 0.03493162, z: 1.2230779}
+  m_Children: []
+  m_Father: {fileID: 6193243654659020906}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: -11.611, y: 59.673, z: 0}
+--- !u!65 &48748881
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48748879}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &48748882
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48748879}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &48748883
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48748879}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &56695632
 GameObject:
   m_ObjectHideFlags: 0
@@ -1367,16 +1462,8 @@ MonoBehaviour:
   fastSwing2: {fileID: 1660058720728347464, guid: ba3b620af3608f946973eee129d7348e, type: 3}
   rotationTimer: 0
   canAttack: 1
-  blood: 0
   cooldown: 0.15
-  bloodMaterial: {fileID: 2100000, guid: c70da9038ca22884f866c12cf3c63f5b, type: 2}
-  slider: {fileID: 1221169583}
-  bloodDrip: {fileID: 2124944119}
-  virtualCamera: {fileID: 1041951002}
-  execution: {fileID: 1547611907}
   enemyThatCould: {fileID: 0}
-  deathVFX: {fileID: 4060720766070379483, guid: f6af472278f24ac4db47c03468951d85, type: 3}
-  bloodText: {fileID: 56695634}
 --- !u!114 &1016158342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1595,6 +1682,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6796a3f86442afe459493457ca262e00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blood: 0
+  bloodMaterial: {fileID: 2100000, guid: c70da9038ca22884f866c12cf3c63f5b, type: 2}
+  slider: {fileID: 1221169583}
+  bloodDrip: {fileID: 2124944119}
+  virtualCamera: {fileID: 1041951002}
+  execution: {fileID: 1547611907}
+  enemyThatCould: {fileID: 0}
+  deathVFX: {fileID: 4060720766070379483, guid: f6af472278f24ac4db47c03468951d85, type: 3}
+  bloodText: {fileID: 56695634}
 --- !u!1 &1041951001
 GameObject:
   m_ObjectHideFlags: 0
@@ -2741,7 +2837,7 @@ MonoBehaviour:
   health: 1
   bloodSplatter: {fileID: 4060720766070379483, guid: af197df4dc326654ebc3176f19833a8e, type: 3}
   bloodMaterial: {fileID: 2100000, guid: c70da9038ca22884f866c12cf3c63f5b, type: 2}
-  playerAttack: {fileID: 1016158341}
+  playerHealth: {fileID: 1016158347}
 --- !u!136 &1796437054
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4633,6 +4729,7 @@ Transform:
   - {fileID: 6684874125787656138}
   - {fileID: 3660028181251899566}
   - {fileID: 4142590051581260636}
+  - {fileID: 48748880}
   m_Father: {fileID: 8058101270011908618}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -8,13 +8,13 @@ public class MeleeEnemyTest : MonoBehaviour
 
     GameObject player;
     NavMeshAgent navMesh;
-    PlayerAttack playerAttack;
+    PlayerHealth playerHealth;
     float invincibility = 0f;
     float originalSpeed;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        playerAttack = player.GetComponent<PlayerAttack>();
+        playerHealth = player.GetComponent<PlayerHealth>();
         navMesh = GetComponent<NavMeshAgent>();
         originalSpeed = navMesh.speed;
     }
@@ -33,7 +33,7 @@ public class MeleeEnemyTest : MonoBehaviour
 
         if ((Mathf.Abs(distance.magnitude) <= 1f) && invincibility <= 0f)
         {
-            playerAttack.TakeDamage(gameObject);
+            playerHealth.TakeDamage(gameObject);
             invincibility = 1f;
             navMesh.speed = 0f;
         }
