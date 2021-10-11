@@ -28,6 +28,11 @@ public class PlayerAttack : MonoBehaviour
     Vector3 initialPosition;
     AudioSource hitSound;
     public CinemachineVirtualCamera virtualCamera;
+    public Execution execution;
+    Animator animator;
+    [HideInInspector] public Transform enemyThatCould;
+    public GameObject deathVFX;
+    public Text bloodText;
 
 
     void Start()
@@ -38,6 +43,7 @@ public class PlayerAttack : MonoBehaviour
         playerInputActions.Player.Enable();
         initialPosition = slider.transform.localPosition;
         hitSound = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
     }
     void Update()
     {
@@ -46,6 +52,8 @@ public class PlayerAttack : MonoBehaviour
         blood -= bloodDrain * Time.deltaTime;
         blood = Mathf.Clamp(blood, 0f, 1.5f);
         slider.value = blood;
+
+        bloodText.text = (Mathf.Round(blood * 100f)).ToString() + "%";
 
         if (blood > 0) bloodDrip.enabled = true;
         else bloodDrip.enabled = false;
@@ -63,11 +71,13 @@ public class PlayerAttack : MonoBehaviour
 
         cooldownMeter -= Time.deltaTime;
 
+        animator.SetFloat("RotationTimer", rotationTimer);
+
         //if (cooldownMeter <= 0f) canAttack = true; else canAttack = false; //Maybe tying the canAttack directly to the cooldown isn't the best idea
 
         if (swingDirection.magnitude > 0.1f)
         {
-            targetAngle = Mathf.Atan2(swingDirection.x, swingDirection.z) * Mathf.Rad2Deg;
+            if (canAttack) targetAngle = Mathf.Atan2(swingDirection.x, swingDirection.z) * Mathf.Rad2Deg;
             if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) && canAttack && cooldownMeter <= 0f)
             {
                 switch (stance)
@@ -76,18 +86,21 @@ public class PlayerAttack : MonoBehaviour
                         stance = 1;
                         rotationTimer = 0.75f;
                         transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+                        animator.SetTrigger("Slash");
                         Attack(0);
                         break;
                     case 1:
                         stance = 2;
                         rotationTimer = 0.75f;
                         transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+                        animator.SetTrigger("Slash");
                         Attack(1);
                         break;
                     case 2:
                         stance = 1;
                         rotationTimer = 0.75f;
                         transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+                        animator.SetTrigger("Slash");
                         Attack(2);
                         break;
                 }
@@ -138,10 +151,10 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float currentBlood)
+    public void TakeDamage(GameObject damageSource)
     {
         float randomNumber = Random.Range(0.0f, 1.0f);
-        if (randomNumber <= currentBlood)
+        if (randomNumber <= blood)
         {
             CinemachineBasicMultiChannelPerlin perlin = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
             perlin.m_AmplitudeGain = 5f;
@@ -152,8 +165,27 @@ public class PlayerAttack : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            execution.Execute();
+            blood = 0f;
+            canAttack = false;
+            PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+            playerMovement.canMove = false;
+            animator.SetTrigger("Death");
             Debug.Log("You're dead!");
+            enemyThatCould = damageSource.transform;
+            rotationTimer = 0f;
+            animator.SetLayerWeight(1, 0f);
+
+
+            Vector3 distance = new Vector3(transform.position.x - enemyThatCould.position.x, 0, transform.position.z - enemyThatCould.position.z).normalized;
+            transform.rotation = Quaternion.LookRotation(-distance);
+            var vfx = Instantiate(deathVFX, transform.position, Quaternion.LookRotation(-distance));
+            vfx.transform.SetParent(transform);
+            //vfx.transform.localScale *= 2;
+            //vfx.GetComponent<VisualEffect>().Se
+            enemyThatCould.GetComponent<MeshRenderer>().material = execution.white;
+            transform.DOMove(transform.position + distance * 2f, 0.5f);
         }
     }
 
@@ -161,7 +193,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (other.CompareTag("Bad"))
         {
-            TakeDamage(blood);
+            TakeDamage(other.gameObject);
         }
     }
 }
