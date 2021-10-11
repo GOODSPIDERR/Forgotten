@@ -10,6 +10,9 @@ using Cinemachine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    PlayerMovement playerMovement;
+    PlayerHealth playerHealth;
+    
     public int stance = 0;
     public GameObject fastSwing1, fastSwing2;
     public float rotationTimer = 0f;
@@ -34,16 +37,24 @@ public class PlayerAttack : MonoBehaviour
     public GameObject deathVFX;
     public Text bloodText;
 
+    //This script really needs to be broken up into 2 scripts: 1 for attacking and 1 for hp
 
     void Start()
     {
-        canAttack = true;
+        #region Getters & Setters
+        //Link
+        playerMovement = GetComponent<PlayerMovement>();
+        playerHealth = GetComponent<PlayerHealth>();
+
+        //Input system
         playerInput = GetComponent<PlayerInput>();
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
+
         initialPosition = slider.transform.localPosition;
         hitSound = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
+        #endregion
     }
     void Update()
     {
@@ -80,7 +91,8 @@ public class PlayerAttack : MonoBehaviour
             if (canAttack) targetAngle = Mathf.Atan2(swingDirection.x, swingDirection.z) * Mathf.Rad2Deg;
             if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) && canAttack && cooldownMeter <= 0f)
             {
-                switch (stance)
+                //This needs to be re-written
+                switch (stance) 
                 {
                     case 0:
                         stance = 1;
@@ -117,6 +129,8 @@ public class PlayerAttack : MonoBehaviour
             stance = 0;
         }
 
+
+        //This is such fucking spaghetti code lmao. Refactor this later
         void Attack(int stance)
         {
             cooldownMeter = cooldown;
@@ -165,11 +179,11 @@ public class PlayerAttack : MonoBehaviour
         }
         else
         {
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //Wow. Wtf lol
+            //Actually this isn't too bad idk why I'm reacting like this
             execution.Execute();
             blood = 0f;
             canAttack = false;
-            PlayerMovement playerMovement = GetComponent<PlayerMovement>();
             playerMovement.canMove = false;
             animator.SetTrigger("Death");
             Debug.Log("You're dead!");
@@ -180,12 +194,11 @@ public class PlayerAttack : MonoBehaviour
 
             Vector3 distance = new Vector3(transform.position.x - enemyThatCould.position.x, 0, transform.position.z - enemyThatCould.position.z).normalized;
             transform.rotation = Quaternion.LookRotation(-distance);
+
             var vfx = Instantiate(deathVFX, transform.position, Quaternion.LookRotation(-distance));
-            vfx.transform.SetParent(transform);
-            //vfx.transform.localScale *= 2;
-            //vfx.GetComponent<VisualEffect>().Se
             enemyThatCould.GetComponent<MeshRenderer>().material = execution.white;
             transform.DOMove(transform.position + distance * 2f, 0.5f);
+            vfx.transform.SetParent(transform);
         }
     }
 

@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class Execution : MonoBehaviour
 {
-    // Start is called before the first frame update
     MeshRenderer[] renderers;
     public Material black, white;
     public SkinnedMeshRenderer characterMat1, characterMat2;
@@ -21,7 +20,6 @@ public class Execution : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Debug.Log(Time.timeScale);

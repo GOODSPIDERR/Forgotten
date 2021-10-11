@@ -11,28 +11,24 @@ public class MeleeEnemyTest : MonoBehaviour
     PlayerAttack playerAttack;
     float invincibility = 0f;
     float originalSpeed;
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerAttack = player.GetComponent<PlayerAttack>();
         navMesh = GetComponent<NavMeshAgent>();
         originalSpeed = navMesh.speed;
-
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //Invincibility frames are on the enemy rather than on the player. This means that the player can get hit many times in quick succession, but only from different enemies. 
         invincibility -= Time.deltaTime;
         Vector3 trueDistance = player.transform.position - transform.position;
         Vector2 distance = new Vector2(trueDistance.x, trueDistance.z);
-        //Debug.Log(distance);
-        //Debug.Log(invincibility);
 
+        //After hitting the player, slowly regain movement speed. 
         navMesh.speed += Time.deltaTime;
         navMesh.speed = Mathf.Clamp(navMesh.speed, 0f, originalSpeed);
-
         navMesh.destination = player.transform.position;
 
         if ((Mathf.Abs(distance.magnitude) <= 1f) && invincibility <= 0f)

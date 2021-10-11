@@ -14,11 +14,6 @@ public class EnemyScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    void Update()
-    {
-
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Attack"))
@@ -31,7 +26,6 @@ public class EnemyScript : MonoBehaviour
 
                 float targetAngle = Mathf.Atan2(difference.x, difference.z) * Mathf.Rad2Deg;
                 Instantiate(bloodSplatter, transform.position, Quaternion.Euler(0, targetAngle, 0));
-                //Destroy(gameObject);
             }
         }
     }

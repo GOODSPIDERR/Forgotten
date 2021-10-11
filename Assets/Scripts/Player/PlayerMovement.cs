@@ -6,12 +6,13 @@ using DG.Tweening;
 
 public class PlayerMovement : MonoBehaviour
 {
+    PlayerHealth playerHealth;
+    PlayerAttack playerAttack;
 
     public float movementSpeed = 5f;
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
     CharacterController controller;
-    PlayerAttack playerAttack;
     public bool canMove;
     Animator animator;
     PlayerInput playerInput;
@@ -20,13 +21,20 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        canMove = true;
-        controller = GetComponent<CharacterController>();
+        #region Getters & Setters
+        //Link
+        playerHealth = GetComponent<PlayerHealth>();
         playerAttack = GetComponent<PlayerAttack>();
-        animator = GetComponent<Animator>();
+
+        //Input system
         playerInput = GetComponent<PlayerInput>();
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
+        
+        //Setters & Getters
+        controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
+        #endregion
     }
 
     void Update()
@@ -34,8 +42,6 @@ public class PlayerMovement : MonoBehaviour
         Vector2 inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
         float xMovement = inputVector.x;
         float yMovement = inputVector.y;
-
-        //Debug.Log(inputVector);
 
         direction = new Vector3(xMovement, 0, yMovement).normalized;
 
@@ -51,8 +57,6 @@ public class PlayerMovement : MonoBehaviour
             controller.Move((direction * movementSpeed * Time.deltaTime) + Vector3.up * -1);
 
             Vector3 localVelocity = transform.InverseTransformDirection(direction);
-
-            //Debug.Log("Testing Solution: " + localVelocity);
 
             animator.SetFloat("VelocityX", localVelocity.x);
             animator.SetFloat("VelocityY", localVelocity.z);
