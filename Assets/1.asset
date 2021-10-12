@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d6e6036c1ffef4a9a8bb9e753e7ebc, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
-  portraitEaseMode: 29
+  portraitEaseMode: 25
+  tweenTime: 0.5
   pOffset1: {x: 10, y: 0, z: 0}
   pOffset2: {x: -10, y: 0, z: 0}
-  rOffset1: {x: 0, y: 0, z: 0.25881913, w: -0.9659258}
-  rOffset2: {x: 0, y: 0, z: 0.25881904, w: 0.9659258}
+  rOffset1: {x: 0, y: 0, z: 0.04815246, w: 0.99884}
+  rOffset2: {x: 0, y: 0, z: 0.9793994, w: -0.20193274}
   character: {fileID: 11400000, guid: 7611cd2e90af02b4c92bf7c2285b6ecd, type: 2}
   text: 'We have come pretty far, fellas. I think we should set up camp here. '

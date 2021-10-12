@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d6e6036c1ffef4a9a8bb9e753e7ebc, type: 3}
   m_Name: 2
   m_EditorClassIdentifier: 
-  portraitEaseMode: 1
+  portraitEaseMode: 32
+  tweenTime: 0.1
+  pOffset1: {x: 0, y: 10, z: 0}
+  pOffset2: {x: 0, y: -10, z: 0}
+  rOffset1: {x: 0, y: 0, z: 0, w: 0}
+  rOffset2: {x: 0, y: 0, z: 0, w: 0}
   character: {fileID: 11400000, guid: d49a9000c3e2a5d4789034a4a47a6761, type: 2}
   text: 'Interesting choice. '

@@ -7,6 +7,7 @@ using DG.Tweening;
 public class DialogueBox : ScriptableObject
 {
     public Ease portraitEaseMode = Ease.Linear;
+    public float tweenTime;
     public Vector3 pOffset1, pOffset2;
     public Quaternion rOffset1, rOffset2;
     public Character character;
