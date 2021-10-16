@@ -7,65 +7,75 @@ using UnityEngine.InputSystem;
 
 
 //Fair warning, this entire script is a mess. Turns out, it's really difficult to make intuitive dialogue boxes that do exactly what you want them to do. 
+[RequireComponent(typeof(Text))]
 public class DialogueManager : MonoBehaviour
 {
-    Vector3 setSize;
+    private Vector3 _setSize;
     public int index = 0;
-    string fullText;
+    private string _fullText;
     public int letterIndex;
-    Text text, charName;
-    Character character;
-    Image portrait;
+    private readonly Text _text;
+    private readonly Text _charName;
+    private Character _character;
+    private readonly Image _portrait;
     public int wordLength;
     public DialogueBox[] dialogueBoxes;
-    int dialogueBoxesLength;
-    PlayerInput playerInput;
-    PlayerInputActions playerInputActions;
+    private int _dialogueBoxesLength;
+    private PlayerInput _playerInput;
+    private PlayerInputActions _playerInputActions;
     public bool activated = false;
-    float timer;
+    private float _timer;
     public float delayAmount = 0.1f;
-    Vector3 pOffset1, pOffset2;
-    Quaternion rOffset1, rOffset2;
-    float tweenTime = 1f;
+    private Vector3 _pOffset1, _pOffset2;
+    private Quaternion _rOffset1, _rOffset2;
+    private float _tweenTime = 1f;
+
+    public DialogueManager(Text text, Text charName, Image portrait, Quaternion rOffset1, Quaternion rOffset2)
+    {
+        _text = text;
+        _charName = charName;
+        this._portrait = portrait;
+        this._rOffset1 = rOffset1;
+        this._rOffset2 = rOffset2;
+    }
 
     private void Start()
     {
         //Input system
-        playerInput = GetComponent<PlayerInput>();
-        playerInputActions = new PlayerInputActions();
-        playerInputActions.Player.Enable();
+        _playerInput = GetComponent<PlayerInput>();
+        _playerInputActions = new PlayerInputActions();
+        _playerInputActions.Player.Enable();
 
-        dialogueBoxesLength = dialogueBoxes.Length;
+        _dialogueBoxesLength = dialogueBoxes.Length;
     }
     void OnEnable()
     {
-        setSize = transform.localScale;
-        transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+        var transform1 = transform;
+        _setSize = transform1.localScale;
+        transform1.localScale = new Vector3(0.01f, 0.01f, 0.01f);
 
-        transform.DOScale(setSize, 1f).SetEase(Ease.InOutBack).OnComplete(() => { ReadyToRoll(); });
+        transform.DOScale(_setSize, 1f).SetEase(Ease.InOutBack).OnComplete(() => { ReadyToRoll(); });
         //index++;
     }
 
-    void Update()
+    private void Update()
     {
-        if (activated)
+        if (!activated) return;
+        _timer += Time.deltaTime;
+
+        if (_timer >= delayAmount)
         {
-            timer += Time.deltaTime;
+            _timer -= delayAmount;
+            letterIndex++;
+            letterIndex = Mathf.Clamp(letterIndex, 0, _fullText.Length);
+        }
 
-            if (timer >= delayAmount)
-            {
-                timer -= delayAmount;
-                letterIndex++;
-                letterIndex = Mathf.Clamp(letterIndex, 0, fullText.Length);
-            }
+        var displayText = _fullText.Substring(0, letterIndex);
+        _text.text = displayText;
 
-            string displayText = fullText.Substring(0, letterIndex);
-            text.text = displayText;
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Increment();
-            }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Increment();
         }
     }
 
@@ -74,26 +84,26 @@ public class DialogueManager : MonoBehaviour
     {
         index++;
         letterIndex = 0;
-        timer = 0f;
+        _timer = 0f;
         activated = false;
         SetParameters();
 
         transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
-        transform.DOScale(setSize, 1f).SetEase(Ease.InOutBack).OnComplete(() => { ReadyToRoll(); });
+        transform.DOScale(_setSize, 1f).SetEase(Ease.InOutBack).OnComplete(() => { ReadyToRoll(); });
     }
 
-    void Disable()
+    private void Disable()
     {
         transform.DOScale(new Vector3(0.01f, 0.01f, 0.01f), 1f).OnComplete(() => { gameObject.SetActive(false); });
     }
 
-    void HeadBob()
+    private void HeadBob()
     {
         //portrait.transform.DORotateQuaternion(rOffset1, tweenTime).SetEase(dialogueBoxes[index].portraitEaseMode).OnComplete(() => portrait.transform.DORotateQuaternion(rOffset2, tweenTime).SetEase(dialogueBoxes[index].portraitEaseMode));
-        portrait.transform.DOMove(pOffset1, tweenTime).SetEase(dialogueBoxes[index].portraitEaseMode).OnComplete(() => portrait.transform.DOMove(pOffset2, tweenTime).SetEase(dialogueBoxes[index].portraitEaseMode).OnComplete(() => { HeadBob(); }));
+        _portrait.transform.DOMove(_pOffset1, _tweenTime).SetEase(dialogueBoxes[index].portraitEaseMode).OnComplete(() => _portrait.transform.DOMove(_pOffset2, _tweenTime).SetEase(dialogueBoxes[index].portraitEaseMode).OnComplete(() => { HeadBob(); }));
     }
 
-    public void ReadyToRoll()
+    private void ReadyToRoll()
     {
         SetParameters();
 
@@ -101,18 +111,20 @@ public class DialogueManager : MonoBehaviour
         activated = true;
     }
 
-    public void SetParameters()
+    private void SetParameters()
     {
-        text.text = dialogueBoxes[index].text;
-        character = dialogueBoxes[index].character;
-        fullText = dialogueBoxes[index].text;
-        tweenTime = dialogueBoxes[index].tweenTime;
+        _text.text = dialogueBoxes[index].text;
+        _character = dialogueBoxes[index].character;
+        _fullText = dialogueBoxes[index].text;
+        _tweenTime = dialogueBoxes[index].tweenTime;
 
-        charName.text = character.name;
-        portrait.sprite = character.portrait;
+        _charName.text = _character.name;
+        _portrait.sprite = _character.portrait;
 
-        pOffset1 = portrait.transform.position + dialogueBoxes[index].pOffset1;
-        pOffset2 = portrait.transform.position + dialogueBoxes[index].pOffset2;
+        var transform1 = _portrait.transform;
+        var position = transform1.position;
+        _pOffset1 = position + dialogueBoxes[index].pOffset1;
+        _pOffset2 = position + dialogueBoxes[index].pOffset2;
 
         Debug.Log(index);
 

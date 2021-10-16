@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SwingScript : MonoBehaviour
 {
-    void Start()
+    private void Start()
     {
         Destroy(gameObject, 0.2f);
     }

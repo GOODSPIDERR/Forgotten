@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VFXSelfDestruct : MonoBehaviour
 {
-    void Start()
+    private void Start()
     {
         Destroy(gameObject, 4);
     }

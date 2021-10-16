@@ -6,27 +6,25 @@ public class EnemyScript : MonoBehaviour
 {
     public int health = 1;
     public GameObject bloodSplatter;
-    GameObject player;
+    private GameObject _player;
     public Material bloodMaterial;
     public PlayerHealth playerHealth;
-    void Start()
+
+    private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Attack"))
-        {
-            health--;
-            if (health <= 0)
-            {
-                playerHealth.IncreaseBlood(0.25f);
-                Vector3 difference = player.transform.position - transform.position;
+        if (!other.CompareTag("Attack")) return;
+        health--;
+        if (health > 0) return;
+        playerHealth.IncreaseBlood(0.25f);
+        var position = transform.position;
+        var difference = _player.transform.position - position;
 
-                float targetAngle = Mathf.Atan2(difference.x, difference.z) * Mathf.Rad2Deg;
-                Instantiate(bloodSplatter, transform.position, Quaternion.Euler(0, targetAngle, 0));
-            }
-        }
+        var targetAngle = Mathf.Atan2(difference.x, difference.z) * Mathf.Rad2Deg;
+        Instantiate(bloodSplatter, position, Quaternion.Euler(0, targetAngle, 0));
     }
 }
