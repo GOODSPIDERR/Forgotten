@@ -296,16 +296,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   letterIndex: 0
-  text: {fileID: 525928581}
-  name: {fileID: 391185491}
-  textDelay: 0.1
-  portrait: {fileID: 2141368141}
   wordLength: 0
   dialogueBoxes:
   - {fileID: 11400000, guid: f409f34369e4d7a41892b5a1b1e8ca8d, type: 2}
   - {fileID: 11400000, guid: 63299d5a78676644298ec0832b09cffe, type: 2}
   activated: 0
-  delayAmount: 0.05
+  delayAmount: 0.08
 --- !u!95 &112930798
 Animator:
   serializedVersion: 3
@@ -1715,9 +1711,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Mari
-
-'
+  m_Text: name
 --- !u!222 &391185492
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2184,12 +2178,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'This is Sir Lorem Ipsum. This is Sir Lorem Ipsum. This is Sir Lorem Ipsum.
-    This is Sir Lorem Ipsum. This is Sir Lorem Ipsum. This is Sir Lorem Ipsum. This
-    is Sir Lorem Ipsum. This is Sir Lorem Ipsum. This is Sir Lorem Ipsum. This is
-    Sir Lorem Ipsum. This is Sir Lorem Ipsum. This is Sir Lorem Ipsum. This is Sir
-    Lorem Ipsum. This is Sir Lorem Ipsum. This is Sir Lorem Ipsum. This is Sir Lorem
-    Ipsum. '
+  m_Text: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
+    ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+    lorem ipsum lorem ipsum lorem ipsum '
 --- !u!222 &525928582
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3557,8 +3549,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.5555702, y: 0, z: 0, w: 0.8314697}
-  m_LocalPosition: {x: 0, y: 11.086555, z: -4.592202}
+  m_LocalRotation: {x: 0, y: -0.95594984, z: 0, w: 0.29353002}
+  m_LocalPosition: {x: 0.38, y: 1.24, z: 1.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
