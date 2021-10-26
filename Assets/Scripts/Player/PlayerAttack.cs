@@ -26,6 +26,8 @@ public class PlayerAttack : MonoBehaviour
     Animator animator;
     [HideInInspector] public Transform enemyThatCould;
 
+    public CameraShake cameraShake;
+
     //This script really needs to be broken up into 2 scripts: 1 for attacking and 1 for hp
 
     void Start()
@@ -67,6 +69,7 @@ public class PlayerAttack : MonoBehaviour
             if (canAttack) targetAngle = Mathf.Atan2(swingDirection.x, swingDirection.z) * Mathf.Rad2Deg;
             if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) && canAttack && cooldownMeter <= 0f)
             {
+                cameraShake.Shake(0.8f, 1f, 3.2f);
                 //This needs to be re-written
                 switch (stance)
                 {

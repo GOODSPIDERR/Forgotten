@@ -7,6 +7,7 @@ public class DestructibleEnvironment : MonoBehaviour
 {
     public int health = 3;
     private Vector3 _initialPosition;
+    public GameObject shatterObject;
 
     private void Start()
     {
@@ -22,6 +23,7 @@ public class DestructibleEnvironment : MonoBehaviour
 
         if (health <= 0)
         {
+            Instantiate(shatterObject, transform.position, Quaternion.Euler(0f, Random.Range(0f, 360f), 0f));
             Destroy(gameObject);
         }
     }
