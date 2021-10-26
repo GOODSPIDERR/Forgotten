@@ -6,6 +6,8 @@ using UnityEngine.AI;
 using Cinemachine;
 using UnityEngine.VFX;
 using DG.Tweening;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -24,8 +26,12 @@ public class PlayerHealth : MonoBehaviour
     public GameObject deathVFX;
     public Text bloodText;
     Vector3 initialPosition;
+    
+    //Post Processing Stuff
+    public Volume volume;
+    private Vignette vignette;
 
-    void Start()
+    private void Start()
     {
         #region Getters & Setters
         //Link
@@ -37,9 +43,12 @@ public class PlayerHealth : MonoBehaviour
         initialPosition = slider.transform.localPosition;
         hitSound = GetComponent<AudioSource>();
         #endregion
+
+        //Post processing
+        volume.profile.TryGet(out vignette);
     }
 
-    void Update()
+    private void Update()
     {
         //Before I forget, please learn how to use scriptable objects and start using them. 
 
@@ -55,6 +64,8 @@ public class PlayerHealth : MonoBehaviour
         else bloodDrip.enabled = false;
 
         bloodMaterial.SetFloat("Cleanliness_", 1f - blood);
+
+        vignette.intensity.value = blood * 0.25f;
     }
 
     public void IncreaseBlood(float newBlood)
@@ -70,10 +81,10 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(GameObject damageSource)
     {
-        float randomNumber = Random.Range(0.0f, 1.0f);
+        var randomNumber = Random.Range(0.0f, 1.0f);
         if (randomNumber <= blood)
         {
-            CinemachineBasicMultiChannelPerlin perlin = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            var perlin = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
             perlin.m_AmplitudeGain = 5f;
             DOTween.To(() => perlin.m_AmplitudeGain, x => perlin.m_AmplitudeGain = x, 0f, 0.5f);
             hitSound.Play();

@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0.5
+  m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 0db054de7bc84c448b73c84fde14fd23, type: 2}
@@ -5319,6 +5319,10 @@ PrefabInstance:
       propertyPath: slider
       value: 
       objectReference: {fileID: 1221169583}
+    - target: {fileID: 7969405646538150401, guid: 24dbb20b3afc326449784ae0640219bb, type: 3}
+      propertyPath: volume
+      value: 
+      objectReference: {fileID: 963194231}
     - target: {fileID: 7969405646538150401, guid: 24dbb20b3afc326449784ae0640219bb, type: 3}
       propertyPath: bloodText
       value: 

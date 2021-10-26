@@ -16,8 +16,6 @@ public class ShatterInitialize : MonoBehaviour
         _rbs = GetComponentsInChildren<Rigidbody>();
         _colliders = GetComponentsInChildren<MeshCollider>();
         selfScript = GetComponent<ShatterInitialize>();
-        
-
     }
 
     private void Start()
@@ -48,7 +46,7 @@ public class ShatterInitialize : MonoBehaviour
     {
         foreach (var rb in _rbs)
         {
-            if (right)  
+            if (right)  //Idk why this doesn't work the way I want it to :/
                 rb.AddForce((transform.position - _playerTransform.position).normalized * 5, ForceMode.Impulse);
             else
             {
