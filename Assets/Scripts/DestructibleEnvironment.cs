@@ -8,6 +8,7 @@ public class DestructibleEnvironment : MonoBehaviour
     public int health = 3;
     private Vector3 _initialPosition;
     public GameObject shatterObject;
+    public bool round;
 
     private void Start()
     {
@@ -23,7 +24,10 @@ public class DestructibleEnvironment : MonoBehaviour
 
         if (health <= 0)
         {
-            Instantiate(shatterObject, transform.position, Quaternion.Euler(0f, Random.Range(0f, 360f), 0f));
+            Instantiate(shatterObject, transform.position,
+                round //If the object is round, randomize its Y rotation for some variety. If not, copy the original's. 
+                    ? Quaternion.Euler(0f, Random.Range(0f, 360f), 0f)
+                    : Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f));
             Destroy(gameObject);
         }
     }

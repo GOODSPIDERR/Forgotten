@@ -11,6 +11,7 @@ public class CameraShake : MonoBehaviour
     private CinemachineBasicMultiChannelPerlin _perlin;
     private float _duration = 0f;
     private float _currentAmplitude = 0f;
+    private float _actualTimer = 0f;
 
     private void Awake()
     {
@@ -26,7 +27,7 @@ public class CameraShake : MonoBehaviour
         
         if (_currentAmplitude >= 0f)
         {
-            _currentAmplitude -= _duration * Time.deltaTime;
+            _currentAmplitude -= _actualTimer * Time.deltaTime;
         }
         else
         {
@@ -39,6 +40,7 @@ public class CameraShake : MonoBehaviour
         _currentAmplitude = amplitude;
         _perlin.m_FrequencyGain = frequency;
         _duration = duration;
+        _actualTimer = amplitude / duration;
     }
     
     

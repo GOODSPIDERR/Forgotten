@@ -322,6 +322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &127374685
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -403,6 +404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   shatterObject: {fileID: 0}
+  round: 0
 --- !u!65 &131799778
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -530,6 +532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   shatterObject: {fileID: 0}
+  round: 0
 --- !u!65 &135725337
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -785,6 +788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &244477216
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -899,6 +903,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &309143421
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1013,6 +1018,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &314912788
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1205,6 +1211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   shatterObject: {fileID: 0}
+  round: 0
 --- !u!65 &384238162
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1365,6 +1372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &390713137
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1579,6 +1587,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &455408260
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1660,6 +1669,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   shatterObject: {fileID: 0}
+  round: 0
 --- !u!65 &484864700
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1839,6 +1849,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &583448276
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1953,6 +1964,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &660858555
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2067,6 +2079,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &681840847
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2274,6 +2287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &750055291
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2388,6 +2402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &874316144
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2502,6 +2517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &904952722
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2850,6 +2866,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &982961175
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2964,6 +2981,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &999714364
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3185,6 +3203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &1200335534
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3524,6 +3543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &1263838294
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3767,6 +3787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   shatterObject: {fileID: 0}
+  round: 0
 --- !u!54 &1414245156
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4221,6 +4242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &1568955120
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4302,6 +4324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   shatterObject: {fileID: 0}
+  round: 0
 --- !u!65 &1582513239
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4462,6 +4485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &1599344552
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4726,6 +4750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &1739794399
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5189,6 +5214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 0
 --- !u!1001 &2063843392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5273,6 +5299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   shatterObject: {fileID: 8299359265588951277, guid: f81931c32a9304c4b85f57186bf04f54, type: 3}
+  round: 1
 --- !u!136 &2063843395
 CapsuleCollider:
   m_ObjectHideFlags: 0
