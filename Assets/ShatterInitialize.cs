@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 public class ShatterInitialize : MonoBehaviour
@@ -10,12 +11,13 @@ public class ShatterInitialize : MonoBehaviour
     private Rigidbody[] _rbs;
     private MeshCollider[] _colliders;
     private ShatterInitialize selfScript;
-    public Transform _playerTransform;
+    public GameObject _playerTransform;
     void Awake()
     {
         _rbs = GetComponentsInChildren<Rigidbody>();
         _colliders = GetComponentsInChildren<MeshCollider>();
         selfScript = GetComponent<ShatterInitialize>();
+        _playerTransform = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Start()
@@ -47,10 +49,10 @@ public class ShatterInitialize : MonoBehaviour
         foreach (var rb in _rbs)
         {
             if (right)  //Idk why this doesn't work the way I want it to :/
-                rb.AddForce((transform.position - _playerTransform.position).normalized * 5, ForceMode.Impulse);
+                rb.AddForce((transform.position - _playerTransform.transform.position).normalized * 5, ForceMode.Impulse);
             else
             {
-                rb.AddForce((transform.position - _playerTransform.position).normalized * 5, ForceMode.Impulse);
+                rb.AddForce((transform.position - _playerTransform.transform.position).normalized * 5, ForceMode.Impulse);
             }
         }
 

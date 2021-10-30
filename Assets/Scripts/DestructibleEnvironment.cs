@@ -9,6 +9,7 @@ public class DestructibleEnvironment : MonoBehaviour
     private Vector3 _initialPosition;
     public GameObject shatterObject;
     public bool round;
+    public GameObject shatterVFX;
 
     private void Start()
     {
@@ -28,6 +29,7 @@ public class DestructibleEnvironment : MonoBehaviour
                 round //If the object is round, randomize its Y rotation for some variety. If not, copy the original's. 
                     ? Quaternion.Euler(0f, Random.Range(0f, 360f), 0f)
                     : Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f));
+            Instantiate(shatterVFX, new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), transform.rotation);
             Destroy(gameObject);
         }
     }
