@@ -50,7 +50,7 @@ MonoBehaviour:
       type: 0
       typeString: 
     - title: IsPlayer
-      value: True
+      value: False
       type: 2
       typeString: CustomFieldType_Boolean
     portrait: {fileID: 0}
@@ -152,11 +152,11 @@ MonoBehaviour:
     - title: Name
       value: Sunken Valley
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: Description
       value: 
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
   - id: 2
     fields:
     - title: Name
