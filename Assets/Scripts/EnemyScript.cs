@@ -5,9 +5,9 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     public int health = 1;
-    public GameObject bloodSplatter;
+    //public GameObject bloodSplatter;
     private GameObject _player;
-    public Material bloodMaterial;
+    //public Material bloodMaterial;
     public PlayerHealth playerHealth;
 
     private void Start()
@@ -25,6 +25,6 @@ public class EnemyScript : MonoBehaviour
         var difference = _player.transform.position - position;
 
         var targetAngle = Mathf.Atan2(difference.x, difference.z) * Mathf.Rad2Deg;
-        Instantiate(bloodSplatter, position, Quaternion.Euler(0, targetAngle, 0));
+        //Instantiate(bloodSplatter, position, Quaternion.Euler(0, targetAngle, 0));
     }
 }

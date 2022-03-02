@@ -51,7 +51,7 @@ public class PlayerAttack : MonoBehaviour
 
         Vector2 attackVector = playerInputActions.Player.Attack.ReadValue<Vector2>();
 
-        Debug.Log(attackVector);
+        //Debug.Log(attackVector);
 
         float xAttack = attackVector.x;
         float yAttack = attackVector.y;
@@ -130,5 +130,10 @@ public class PlayerAttack : MonoBehaviour
             var swing = Instantiate(targetSwing, transform.position + transform.forward + transform.up, transform.rotation);
             swing.transform.parent = gameObject.transform;
         }
+    }
+
+    public void SetAttack(bool attack)
+    {
+        canAttack = attack;
     }
 }

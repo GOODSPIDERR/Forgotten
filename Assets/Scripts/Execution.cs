@@ -24,7 +24,7 @@ public class Execution : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(Time.timeScale);
+        //Debug.Log(Time.timeScale);
     }
 
     public void Execute()

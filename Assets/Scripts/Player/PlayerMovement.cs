@@ -80,4 +80,9 @@ public class PlayerMovement : MonoBehaviour
             transform.DOMove(transform.position + new Vector3(direction.x, 0, direction.z) * 3, 0.5f, false).SetEase(Ease.OutSine).OnComplete(() => canMove = true); //This needs to be reworked to prevent the player from being able to go through walls when dodging
         }
     }
+
+    public void SetMove(bool move)
+    {
+        canMove = move;
+    }
 }

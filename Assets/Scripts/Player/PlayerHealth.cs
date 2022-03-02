@@ -6,8 +6,6 @@ using UnityEngine.AI;
 using Cinemachine;
 using UnityEngine.VFX;
 using DG.Tweening;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -15,7 +13,7 @@ public class PlayerHealth : MonoBehaviour
     PlayerMovement playerMovement;
     PlayerAttack playerAttack;
     public float blood = 0f;
-    public Material bloodMaterial;
+    //public Material bloodMaterial;
     public Slider slider;
     public VisualEffect bloodDrip;
     AudioSource hitSound;
@@ -23,13 +21,13 @@ public class PlayerHealth : MonoBehaviour
     public Execution execution;
     Animator animator;
     [HideInInspector] public Transform enemyThatCould;
-    public GameObject deathVFX;
+    //public GameObject deathVFX;
     public Text bloodText;
     Vector3 initialPosition;
     
     //Post Processing Stuff
-    public Volume volume;
-    private Vignette vignette;
+    //public Volume volume;
+    //private Vignette vignette;
 
     private void Start()
     {
@@ -45,7 +43,7 @@ public class PlayerHealth : MonoBehaviour
         #endregion
 
         //Post processing
-        volume.profile.TryGet(out vignette);
+        //volume.profile.TryGet(out vignette);
     }
 
     private void Update()
@@ -63,9 +61,9 @@ public class PlayerHealth : MonoBehaviour
         if (blood > 0) bloodDrip.enabled = true;
         else bloodDrip.enabled = false;
 
-        bloodMaterial.SetFloat("Cleanliness_", 1f - blood);
+        //bloodMaterial.SetFloat("Cleanliness_", 1f - blood);
 
-        vignette.intensity.value = blood * 0.25f;
+        //vignette.intensity.value = blood * 0.25f;
     }
 
     public void IncreaseBlood(float newBlood)
@@ -109,10 +107,10 @@ public class PlayerHealth : MonoBehaviour
             Vector3 distance = new Vector3(transform.position.x - enemyThatCould.position.x, 0, transform.position.z - enemyThatCould.position.z).normalized;
             transform.rotation = Quaternion.LookRotation(-distance);
 
-            var vfx = Instantiate(deathVFX, transform.position, Quaternion.LookRotation(-distance));
+            //var vfx = Instantiate(deathVFX, transform.position, Quaternion.LookRotation(-distance));
             enemyThatCould.GetComponent<MeshRenderer>().material = execution.white;
             transform.DOMove(transform.position + distance * 2f, 0.5f);
-            vfx.transform.SetParent(transform);
+            //vfx.transform.SetParent(transform);
         }
     }
 
