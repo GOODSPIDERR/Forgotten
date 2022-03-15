@@ -1156,7 +1156,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: Timeline(pause, Timeline);
+        value: Timeline(speed, Timeline,0)
         type: 0
         typeString: CustomFieldType_Text
       conversationID: 4
@@ -1217,11 +1217,11 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Sequence
-        value: 
+        value: Timeline(speed, Timeline,1)
         type: 0
         typeString: 
       - title: Response Menu Sequence
-        value: Timeline(play, Timeline);
+        value: 
         type: 0
         typeString: 
       conversationID: 4
@@ -1331,11 +1331,11 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Sequence
-        value: 
+        value: Timeline(speed, Timeline,1)
         type: 0
         typeString: 
       - title: Response Menu Sequence
-        value: Timeline(play, Timeline);
+        value: 
         type: 0
         typeString: 
       conversationID: 4
@@ -1390,7 +1390,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Sequence
-        value: Timeline(pause, Timeline);
+        value: Timeline(speed, Timeline,0)
         type: 0
         typeString: 
       conversationID: 4
@@ -1510,7 +1510,13 @@ MonoBehaviour:
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
-      outgoingLinks: []
+      outgoingLinks:
+      - originConversationID: 4
+        originDialogueID: 7
+        destinationConversationID: 4
+        destinationDialogueID: 8
+        isConnector: 0
+        priority: 2
       conditionsString: 
       userScript: 
       onExecute:
@@ -1520,6 +1526,55 @@ MonoBehaviour:
         serializedVersion: 2
         x: 170.83507
         y: 534.8248
+        width: 160
+        height: 30
+    - id: 8
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: 
+      - title: Description
+        value: 
+        type: 0
+        typeString: 
+      - title: Actor
+        value: 1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: 6
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Dialogue Text
+        value: 
+        type: 0
+        typeString: 
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: 
+      conversationID: 4
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 170.83507
+        y: 584.8248
         width: 160
         height: 30
     entryGroups: []
