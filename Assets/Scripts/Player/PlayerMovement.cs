@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         playerAttack = GetComponent<PlayerAttack>();
 
         //Input system
-        playerInput = GetComponent<PlayerInput>();
+        //playerInput = GetComponent<PlayerInput>();
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
 
@@ -49,17 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (direction.magnitude >= 0.1f && canMove)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-
-            if (playerAttack.stance == 0) transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-            controller.Move((direction * movementSpeed * Time.deltaTime) + Vector3.up * -1);
-
-            Vector3 localVelocity = transform.InverseTransformDirection(direction);
-
-            animator.SetFloat("VelocityX", localVelocity.x);
-            animator.SetFloat("VelocityY", localVelocity.z);
+            Move(direction);
 
         }
         else
@@ -79,6 +69,21 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg, 0);
             transform.DOMove(transform.position + new Vector3(direction.x, 0, direction.z) * 3, 0.5f, false).SetEase(Ease.OutSine).OnComplete(() => canMove = true); //This needs to be reworked to prevent the player from being able to go through walls when dodging
         }
+    }
+
+    public void Move(Vector2 movementVector)
+    {
+        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+
+        if (playerAttack.stance == 0) transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+        controller.Move((direction * movementSpeed * Time.deltaTime) + Vector3.up * -1);
+
+        Vector3 localVelocity = transform.InverseTransformDirection(direction);
+
+        animator.SetFloat("VelocityX", localVelocity.x);
+        animator.SetFloat("VelocityY", localVelocity.z);
     }
 
     public void SetMove(bool move)
