@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour
     public float blood = 0f;
     //public Material bloodMaterial;
     public Slider slider;
-    public VisualEffect bloodDrip;
+    public ParticleSystem bloodDrip;
     AudioSource hitSound;
     public CinemachineVirtualCamera virtualCamera;
     public Execution execution;
@@ -58,8 +58,13 @@ public class PlayerHealth : MonoBehaviour
 
         bloodText.text = (Mathf.Round(blood * 100f)).ToString() + "%";
 
-        if (blood > 0) bloodDrip.enabled = true;
-        else bloodDrip.enabled = false;
+        var emissionModule = bloodDrip.emission;
+        if (blood > 0) emissionModule.enabled = true;
+        else
+        {
+            var bloodDripEmission = emissionModule;
+            bloodDripEmission.enabled = false;
+        }
 
         //bloodMaterial.SetFloat("Cleanliness_", 1f - blood);
 
