@@ -54449,7 +54449,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
+    type: 0
     angle: 24.2
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -84598,31 +84598,11 @@ PrefabInstance:
     - target: {fileID: 8613924513171937491, guid: 24dbb20b3afc326449784ae0640219bb, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d5b3eeadbf49e304b98b032a09e3bcce, type: 2}
+      objectReference: {fileID: 2100000, guid: db5b832f245366b4694603dd7a9f27e7, type: 2}
     - target: {fileID: 8613924513171937491, guid: 24dbb20b3afc326449784ae0640219bb, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: d5b3eeadbf49e304b98b032a09e3bcce, type: 2}
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: outlineMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: outlineColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: outlineColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: outlineColor.r
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24dbb20b3afc326449784ae0640219bb, type: 3}
 --- !u!137 &8736685471640957054 stripped

@@ -30,6 +30,6 @@ Material:
     - _Cutoff: 0.13
     - _Float2: 0.1
     - _Opacity: 1
-    - __dirty: 0
+    - __dirty: 1
     m_Colors: []
   m_BuildTextureStacks: []
