@@ -7,6 +7,7 @@ using Cinemachine;
 using UnityEngine.VFX;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -24,10 +25,9 @@ public class PlayerHealth : MonoBehaviour
     //public GameObject deathVFX;
     public Text bloodText;
     Vector3 initialPosition;
-    
-    //Post Processing Stuff
-    //public Volume volume;
-    //private Vignette vignette;
+
+    public PostProcessVolume volume;
+    private Vignette vignette;
 
     private void Start()
     {
@@ -43,7 +43,7 @@ public class PlayerHealth : MonoBehaviour
         #endregion
 
         //Post processing
-        //volume.profile.TryGet(out vignette);
+        volume.profile.TryGetSettings(out vignette);
     }
 
     private void Update()
@@ -63,7 +63,7 @@ public class PlayerHealth : MonoBehaviour
 
         //bloodMaterial.SetFloat("Cleanliness_", 1f - blood);
 
-        //vignette.intensity.value = blood * 0.25f;
+        vignette.intensity.value = blood * 0.35f;
     }
 
     public void IncreaseBlood(float newBlood)

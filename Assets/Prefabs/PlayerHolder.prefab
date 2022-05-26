@@ -2469,6 +2469,7 @@ MonoBehaviour:
   execution: {fileID: 0}
   enemyThatCould: {fileID: 0}
   bloodText: {fileID: 0}
+  volume: {fileID: 0}
 --- !u!1 &7969405647645005951
 GameObject:
   m_ObjectHideFlags: 0
@@ -2509,7 +2510,7 @@ VisualEffect:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7969405647645005951}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Asset: {fileID: 0}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
